@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timer and Stopwatch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        .timer {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .buttons {
+            text-align: center;
+        }
+        
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .buttons button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Timer and Stopwatch</h2>
+        <div class="timer" id="timer">00:00:00</div>
+        <div class="buttons">
+            <button onclick="startTimer()">Start Timer</button>
+            <button onclick="stopTimer()">Stop Timer</button>
+            <button onclick="resetTimer()">Reset Timer</button>
+            <button onclick="startStopwatch()">Start Stopwatch</button>
+            <button onclick="stopStopwatch()">Stop Stopwatch</button>
+            <button onclick="resetStopwatch()">Reset Stopwatch</button>
+        </div>
+    </div>
+
+    <script>
+        var timerInterval;
+        var stopwatchInterval;
+        var timerTime = 0;
+        var stopwatchTime = 0;
+
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerTime = 0;
+            updateTimer();
+        }
+
+        function updateTimer() {
+            var hours = Math.floor(timerTime / 3600);
+            var minutes = Math.floor((timerTime % 3600) / 60);
+            var seconds = timerTime % 60;
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            document.getElementById("timer").innerText = hours + ":" + minutes + ":" + seconds;
+
+            timerTime++;
+        }
+
+        function startStopwatch() {
+            stopwatchInterval = setInterval(updateStopwatch, 1000);
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatchInterval);
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchTime = 0;
+            updateStopwatch();
+        }
+
+        function updateStopwatch() {
+            var hours = Math.floor(stopwatchTime / 3600);
+            var minutes = Math.floor((stopwatchTime % 3600) / 60);
+            var seconds = stopwatchTime % 60;
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            document.getElementById("timer").innerText = hours + ":" + minutes + ":" + seconds;
+
+            stopwatchTime++;
+        }
+    </script>
+</body>
+</html>
